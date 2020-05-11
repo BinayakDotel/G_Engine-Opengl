@@ -1,0 +1,18 @@
+﻿  App.cpp
+D:\Computer Vision\My APP\opengl\App.cpp(1,10): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Error.cpp
+D:\Computer Vision\My APP\opengl\Error.h(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  IndexBuffer.cpp
+D:\Computer Vision\My APP\opengl\IndexBuffer.cpp(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Renderer.cpp
+D:\Computer Vision\My APP\opengl\Error.h(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Shader.cpp
+D:\Computer Vision\My APP\opengl\Shader.h(3,10): fatal error C1083: Cannot open include file: 'glm.hpp': No such file or directory
+  stb_image.cpp
+  Texture.cpp
+D:\Computer Vision\My APP\opengl\Error.h(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  VertexArray.cpp
+D:\Computer Vision\My APP\opengl\Error.h(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  VertexBuffer.cpp
+D:\Computer Vision\My APP\opengl\VertexBuffer.cpp(2,9): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Generating Code...
