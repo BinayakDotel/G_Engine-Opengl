@@ -11,5 +11,6 @@ public:
 
 	void bindIndex() const;
 	void unBindIndex() const;
+	void deleteIndex() const;
 	inline unsigned int getCount() const { return m_count; }
 };

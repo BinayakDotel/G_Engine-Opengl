@@ -18,13 +18,20 @@
 #include <Vertex.h>
 #include <LoadOBJ.h>
 #include <PrespCamera.h>
+#include <Object2D.h>
 
 #define WIDTH 1240
 #define HEIGHT 800
 
 static unsigned int numberofQuads = 0;
-static glm::vec4 colCoord={ 1.0f, 1.0f, 1.0f, 1.0f };
 static std::vector<glm::vec3> vertexCoord;
+static unsigned int maxQuads = 10;
+static unsigned int maxVertices = 4 * maxQuads;
+static const unsigned int maxIndices = 6 * maxVertices;
+static int offset = 0;
+static unsigned int indices[6 * 4 * 10];
+static std::vector<unsigned int> index;
+std::vector<glm::vec2> tex;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_E && action == GLFW_PRESS)
@@ -32,6 +39,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 static glm::vec4 determineColor(char color[6]) {
+	static glm::vec4 colCoord;
+
 	if (strcmp(color, "red") == 0) {
 		colCoord={ 0.9f, 0.2f, 0.2f, 1.0f };
 	}
@@ -44,30 +53,34 @@ static glm::vec4 determineColor(char color[6]) {
 	return colCoord;
 }
 
-static std::vector<Vertex> createObject(const std::string load, glm::vec3 pos, float id, char color[6]) {
-	LoadOBJ obj(load);
-	vertexCoord = obj.readObject();
+static std::vector<Vertex> createObject(const std::string& load, glm::vec3 pos, float id, char color[6]) {
+	Object2D obj = loadOBJ(load);
 
-	determineColor(color);
+	glm::vec4 colCoord= determineColor(color);
 
-	glm::vec3 temp;
-	int size = vertexCoord.size();
+	//glm::vec3 temp;
+	int vertex_size = obj.vertex.size();
 
-	for (int i = 0; i < size; i++) {
-		if (i == 2 || i == 6 || i == 10) {
-			temp= vertexCoord[i];
-			vertexCoord[i] = vertexCoord[i + 1];
-			vertexCoord[i + 1] = temp;
-		}
+	std::vector<Vertex> vertices;
+
+	vertices.clear();
+	index.clear();
+	//Pushing vertex datas into the vertices list
+	tex ={ {0.0f,0.0f}, {1.0f,0.0f}, {1.0f,1.0f}, {0.0f,1.0f} };
+	for (int i=0; i < vertex_size; i++) {
+		vertices.push_back({ obj.vertex.at(i) + pos, colCoord, obj.texCoords.at(i), id });
 	}
-	std::vector<Vertex> vertex;
-
-	for (int i=0; i < size; i++) {
-		vertex.push_back({ vertexCoord[i], colCoord, {0.0f, 1.0f}, id });
+	//Displaing vertex datas from the vertices list
+	for (size_t i = 0; i < vertices.size(); i++) {
+		std::cout <<"x: " <<vertices.at(i).position.x << " y: " << vertices.at(i).position.y << " z: " << vertices.at(i).position.z << std::endl;
+		//std::cout << "color[" << i << "]: (" << vertices.at(i).texcoord.x <<", "<< vertices.at(i).texcoord.x <<" )" <<std::endl;
 	}
+	
+	std::cout << "VERTEX SIZE: " << vertices.size() << std::endl;
+	std::cout << "INDEX SIZE: " << index.size() << std::endl;
 
 	numberofQuads += 1;
-	return { vertex };
+	return vertices;
 }
 
 int main() {
@@ -96,7 +109,7 @@ int main() {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return -1;
 	}
-	glfwSwapInterval(10);
+	glfwSwapInterval(5);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	glfwSetKeyCallback(window, key_callback);
@@ -129,12 +142,14 @@ int main() {
 		"in vec2 o_texCoords;\n"
 		"in float o_Index;\n"
 		"uniform sampler2D u_Texture;\n"
-		"uniform vec4 light;\n"
+		//"uniform vec4 light;\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"   color= texture(u_Texture, o_texCoords) * o_Color;\n"
-		"	color= vec4(o_Color * light);\n"
+		"   vec4 sprite= texture(u_Texture, o_texCoords);\n"
+		"	if(sprite.a < 0.1){ discard; }\n"
+		"	color= sprite;\n"
+		//"	color= vec4(o_Color * light);\n"
 		"}\n";
 	
 	std::string lightFragmentShader=
@@ -149,16 +164,12 @@ int main() {
 		"	lightColor= vec4(1.0f);\n"
 		"}\n"; 
 
-	unsigned int maxQuads = 100;
-	unsigned int maxVertices = 4 * maxQuads;
-	const unsigned int maxIndices = 6 * maxVertices;
-	int offset = 0;
-	unsigned int indices[6 * 4 * 100];
-
 	double xpos=0.0, ypos=0.0;
 
 	VertexBuffer vb(nullptr, sizeof(Vertex) * 1000);
 
+	//unsigned int ind[6 * 4 * 10];
+	
 	for (unsigned int i = 0; i < maxIndices; i+=6) {
 		indices[i + 0] = 0 + offset;
 		indices[i + 1] = 1 + offset;
@@ -170,12 +181,11 @@ int main() {
 
 		offset += 4;
 	}
-
+	
 	IndexBuffer ib(indices, maxIndices);
-	ib.bindIndex();
 	VertexBufferLayout layout;
 	layout.push<float>(3);
-	layout.push<float>(4);
+	layout.push<float>(3);
 	layout.push<float>(2);
 	layout.push<float>(1);
 	VertexArray va;
@@ -183,11 +193,19 @@ int main() {
 	Shader shader(vertexShader, fragmentShader);
 	shader.bindShader();
 	
-	Texture texture("images/branch.jpg");
-	texture.bindTexture();
+	std::vector<std::string> action;
+	action.push_back("images/ninja/pos1.png");
+	action.push_back("images/ninja/pos2.png");
+	action.push_back("images/ninja/pos3.png");
+	action.push_back("images/ninja/pos4.png");
+	action.push_back("images/ninja/pos5.png");
+	action.push_back("images/ninja/pos6.png");
+	action.push_back("images/ninja/pos7.png");
+
+	int texPos=0;
 	shader.setUniform1i("u_Texture", 0);
 
-	glm::vec3 pos = { 0.0f, 0.0f, 3.0f };
+	glm::vec3 pos = { 0.0f, 0.0f, 5.0f };
 	float aspect= float(WIDTH) / float(HEIGHT);
 	float movespeed= 0.1f;
 	PrespCamera camera(pos, 75.0f, aspect, 0.1f, 100.0f);
@@ -202,6 +220,11 @@ int main() {
 	strcpy_s(col[1], "blue");
 
 	Renderer render;
+	char loadedObj[5][30];
+	strcpy_s(loadedObj[0], "objects/hexa.obj");
+	strcpy_s(loadedObj[1], "objects/Quad.obj");
+	int x=1;
+	auto q1= createObject(loadedObj[x], q2pos, 0.0f, col[0]);
 
 	do {
 		render.clearScreen();
@@ -211,14 +234,16 @@ int main() {
 
 		glfwGetCursorPos(window, &xpos, &ypos);
         numberofQuads = 0;
-		//auto q1 = createQuad("objects/circle.obj", q1pos, 0.0f, col[0]);
-		std::vector<Vertex> q1= createObject("objects/circle.obj", q1pos, 0.0f, col[0]);
+
 		int size = q1.size();
 
-		Vertex vertices[100];
+		Vertex vertices[500];
 
 		memcpy(vertices, q1.data(), q1.size() * sizeof(Vertex));
+
 		q1.erase(q1.begin(), q1.end());
+
+		Texture texture(action[texPos]);
 
 		vb.bindVertex(vertices, sizeof(vertices));
 		ib.bindIndex();
@@ -227,7 +252,7 @@ int main() {
 		texture.bindTexture();
 		shader.setUniform1i("u_Texture", 0);
 		shader.setUniformMat4f("MVP", camera.getModelViewMatrix());
-		shader.setUniform4f("light", 1.0f, 0.0f, 0.0f, 1.0f);
+		//shader.setUniform4f("light", 1.0f, 0.0f, 0.0f, 1.0f);
 
 		render.Draw(va, ib, shader);
 
@@ -289,6 +314,11 @@ int main() {
 				strcpy_s(col[1], "blue");
 			}
 		}
+		if (texPos < 6)
+			texPos+=1;
+		else if (texPos >= 6)
+			texPos = 0;
+		std::cout << "value: " << texPos << std::endl;
 		camera.setPosition(pos);
 		camera.moveUp(up);
 		camera.moveForward(forward);

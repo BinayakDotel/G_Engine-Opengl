@@ -4,7 +4,6 @@
 void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const {
 	shader.bindShader();
 	va.bindVertexArray();
-	ib.bindIndex();
 	GLCALL(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
 }
 void Renderer::clearScreen() const {
