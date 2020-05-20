@@ -34,7 +34,6 @@ public:
 	void push<float>(unsigned int count) {
 		m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
 		m_Stride += count * VertexBufferLayout::GetSizeOfType(GL_FLOAT);
-		print(count);
 	}
 	template<>
 	void push<unsigned int>(unsigned int count) {

@@ -4,7 +4,7 @@
 #include <Vertex.h>
 #include <print.h>
 
-VertexBuffer::VertexBuffer(const void* vertices, unsigned int size) {
+VertexBuffer::VertexBuffer(const void* vertices, unsigned int size){
     GLCALL(glGenBuffers(1, &m_renderer_id));
     GLCALL(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
     GLCALL(glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_DYNAMIC_DRAW));

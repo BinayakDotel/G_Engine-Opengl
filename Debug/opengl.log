@@ -1,14 +1,2 @@
-﻿  App.cpp
-  Error.cpp
-  IndexBuffer.cpp
-  OrthoCamera.cpp
-  PrespCamera.cpp
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-  VertexBuffer.cpp
-  stb_image.cpp
-  test.cpp
-  Generating Code...
+﻿  test.cpp
   opengl.vcxproj -> D:\Computer Vision\My APP\opengl\Debug\opengl.exe
