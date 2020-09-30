@@ -1,13 +1,21 @@
+//#include "glpch.h"
 #include <OrthoCamera.h>
+#include <gtc/matrix_transform.hpp>
 
-OrthoCamera::OrthoCamera(float left, float right, float bottom, float top, float far, float near)
-	:m_projectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), 
-		m_viewMatrix(glm::mat4(1.0f))
-{
-	m_ModelViewMatrix = m_viewMatrix * m_projectionMatrix;
+OrthoCamera::OrthoCamera(float left, float right, float bottom, float top)
+	: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f) {
+	m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }
-void OrthoCamera::updateTransform() {
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) * glm::rotate(glm::mat4(1.0f), m_Rotation, glm::vec3(0, 0, 1)) * glm::scale(glm::mat4(1.0f), m_Scale);
-	m_viewMatrix = glm::inverse(transform);
-	m_ModelViewMatrix = m_viewMatrix * m_projectionMatrix;
+
+void OrthoCamera::SetProjection(float left, float right, float bottom, float top) {
+	m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+	m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+}
+
+void OrthoCamera::RecalculateViewMatrix() {
+	glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) *
+		glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
+
+	m_ViewMatrix = glm::inverse(transform);
+	m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }

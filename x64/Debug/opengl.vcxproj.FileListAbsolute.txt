@@ -1,0 +1,2 @@
+D:\Computer Vision\My APP\G_Engine-Opengl\x64\Debug\opengl.exe
+D:\Computer Vision\My APP\G_Engine-Opengl\x64\Debug\opengl.pdb

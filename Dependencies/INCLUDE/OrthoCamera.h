@@ -1,30 +1,30 @@
 #pragma once
-#include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
+
+#include <glm.hpp>
 
 class OrthoCamera {
 private:
-	glm::mat4 m_ModelViewMatrix;
-	glm::mat4 m_projectionMatrix;
-	glm::mat4 m_viewMatrix;
+	void RecalculateViewMatrix();
+private:
+	glm::mat4 m_ProjectionMatrix;
+	glm::mat4 m_ViewMatrix;
+	glm::mat4 m_ViewProjectionMatrix;
 
-	glm::vec3 m_Position;
+	glm::vec3 m_Position ={ 0.0f, 0.0f, 0.0f };
 	float m_Rotation = 0.0f;
-	glm::vec3 m_Scale;
-
+	
 public:
-	OrthoCamera(float left, float right, float bottom, float top, float far, float near);
+	OrthoCamera(float left, float right, float bottom, float top);
 
-	void setPosition(glm::vec3 position) { m_Position = position; updateTransform(); }
-	const glm::vec3& getPosition() const { return m_Position; }
+	void SetProjection(float left, float right, float bottom, float top);
 
-	void setRotation(float rotation) { m_Rotation = rotation; updateTransform();}
-	float getRotation() const { return m_Rotation; }
+	const glm::vec3& GetPosition() const { return m_Position; }
+	void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
 
-	void setScale(glm::vec3 scale) { m_Scale = scale; updateTransform(); }
-	const glm::vec3& getScale() const { return m_Scale; }
+	float GetRotation() const { return m_Rotation; }
+	void SetRotation(float rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
 
-	const glm::mat4 getModelViewMatrix() const { return m_ModelViewMatrix; }
-
-	void updateTransform();
+	const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
+	const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+	const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 };

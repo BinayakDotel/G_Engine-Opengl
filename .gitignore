@@ -3,10 +3,19 @@
 # Directories
 **bin/
 **bin-int/
+**objects/
+**images/
+**Dependencies/TINYGLTF/
+**Dependencies/TINYLOADER/
 
 # Files
 *.user
 *imgui.ini
+*test.cpp
+*BufferData.cpp
+*LoadGLTF.cpp
+*Shade.cpp
+*Shaders.cpp
 
 # Visual Studio
 .vs/

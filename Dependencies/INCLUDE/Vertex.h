@@ -2,8 +2,8 @@
 #include <vector>
 
 struct Vertex{
-	glm::vec3 position;
-	glm::vec3 color;
-    glm::vec2 texcoord;
-	float id;
+	glm::vec3 vertex;
+	glm::vec3 normal;
+	glm::vec2 texture;
+	glm::vec4 color;
 };

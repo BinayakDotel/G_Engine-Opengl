@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -87,12 +87,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\ImGui;D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\TINYGLTF\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\TINYGLTF\lib;D:\Computer Vision\My APP\G_Engine-Opengl\packages\opencv3.1.redist.1.0\build\native\bin\Win32\v120\Debug;$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -102,10 +102,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,14 +119,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\ImGui;D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\TINYGLTF\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Computer Vision\My APP\G_Engine-Opengl\Dependencies\TINYGLTF\lib;D:\Computer Vision\My APP\G_Engine-Opengl\packages\opencv3.1.redist.1.0\build\native\bin\Win32\v120\Debug;$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -135,30 +138,45 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\INCLUDE</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLM</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Dependencies\GLM\detail\glm.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="OrthoCameraController.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Dependencies\INCLUDE\GenerateScene.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="OrthoCamera.cpp" />
     <ClCompile Include="PrespCamera.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\GLEW\include\GL\eglew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\glew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\glxew.h" />
+    <ClInclude Include="Dependencies\GLEW\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h" />
     <ClInclude Include="Dependencies\GLM\common.hpp" />
     <ClInclude Include="Dependencies\GLM\detail\compute_common.hpp" />
     <ClInclude Include="Dependencies\GLM\detail\compute_vector_relational.hpp" />
@@ -441,24 +459,54 @@
     <ClInclude Include="Dependencies\GLM\vec3.hpp" />
     <ClInclude Include="Dependencies\GLM\vec4.hpp" />
     <ClInclude Include="Dependencies\GLM\vector_relational.hpp" />
+    <ClInclude Include="Dependencies\ImGui\imconfig.h" />
+    <ClInclude Include="Dependencies\ImGui\imgui.h" />
+    <ClInclude Include="Dependencies\ImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="Dependencies\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\ImGui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\ImGui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\INCLUDE\GLTFData.h" />
+    <ClInclude Include="Dependencies\INCLUDE\OrthoCameraController.h" />
+    <ClInclude Include="Dependencies\INCLUDE\Shader.h" />
+    <ClInclude Include="Dependencies\INCLUDE\Window.h" />
+    <ClInclude Include="Dependencies\INCLUDE\Animation.h" />
+    <ClInclude Include="Dependencies\INCLUDE\TestingBase64.h" />
+    <ClInclude Include="Dependencies\INCLUDE\Controller.h" />
     <ClInclude Include="Dependencies\INCLUDE\Error.h" />
+    <ClInclude Include="Dependencies\INCLUDE\GenerateScene.h" />
     <ClInclude Include="Dependencies\INCLUDE\IndexBuffer.h" />
     <ClInclude Include="Dependencies\INCLUDE\LoadOBJ.h" />
     <ClInclude Include="Dependencies\INCLUDE\Object2D.h" />
     <ClInclude Include="Dependencies\INCLUDE\OrthoCamera.h" />
+    <ClInclude Include="Dependencies\INCLUDE\picojson.h" />
     <ClInclude Include="Dependencies\INCLUDE\PrespCamera.h" />
     <ClInclude Include="Dependencies\INCLUDE\print.h" />
-    <ClInclude Include="Dependencies\INCLUDE\Renderer.h" />
-    <ClInclude Include="Dependencies\INCLUDE\Shader.h" />
-    <ClInclude Include="Dependencies\INCLUDE\stb_image.h" />
     <ClInclude Include="Dependencies\INCLUDE\Texture.h" />
+    <ClInclude Include="Dependencies\INCLUDE\tiny_gltf_loader.h" />
     <ClInclude Include="Dependencies\INCLUDE\Vertex.h" />
     <ClInclude Include="Dependencies\INCLUDE\VertexArray.h" />
     <ClInclude Include="Dependencies\INCLUDE\VertexBuffer.h" />
     <ClInclude Include="Dependencies\INCLUDE\VertexBufferLayout.h" />
+    <ClInclude Include="Dependencies\INCLUDE\TimeStep.h" />
+    <ClInclude Include="Dependencies\TINYGLTF\include\json.hpp" />
+    <ClInclude Include="Dependencies\TINYGLTF\include\stb_image.h" />
+    <ClInclude Include="Dependencies\TINYGLTF\include\stb_image_write.h" />
+    <ClInclude Include="Dependencies\TINYGLTF\include\tiny_gltf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="Dependencies\GLEW\doc\advanced.html" />
+    <None Include="Dependencies\GLEW\doc\basic.html" />
+    <None Include="Dependencies\GLEW\doc\build.html" />
+    <None Include="Dependencies\GLEW\doc\credits.html" />
+    <None Include="Dependencies\GLEW\doc\glew.html" />
+    <None Include="Dependencies\GLEW\doc\glxew.html" />
+    <None Include="Dependencies\GLEW\doc\index.html" />
+    <None Include="Dependencies\GLEW\doc\install.html" />
+    <None Include="Dependencies\GLEW\doc\log.html" />
+    <None Include="Dependencies\GLEW\doc\wglew.html" />
     <None Include="Dependencies\GLM\detail\func_common.inl" />
     <None Include="Dependencies\GLM\detail\func_common_simd.inl" />
     <None Include="Dependencies\GLM\detail\func_exponential.inl" />
@@ -595,11 +643,11 @@
     <None Include="Dependencies\GLM\gtx\vector_angle.inl" />
     <None Include="Dependencies\GLM\gtx\vector_query.inl" />
     <None Include="Dependencies\GLM\gtx\wrap.inl" />
+    <None Include="Dependencies\Student.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dependencies\GLM\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

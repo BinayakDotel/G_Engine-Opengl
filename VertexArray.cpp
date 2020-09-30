@@ -3,11 +3,11 @@
 #include "print.h"
 #include <Vertex.h>
 
-VertexArray::VertexArray() {
-	GLCALL(glGenVertexArrays(1, &m_renderer_id));
+VertexArray::VertexArray(){
+	vao_id= 0;
 }
 VertexArray::~VertexArray() {
-	GLCALL(glDeleteVertexArrays(1, &m_renderer_id));
+	GLCALL(glDeleteVertexArrays(1, &vao_id));
 }
 void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) {
 	bindVertexArray();
@@ -20,9 +20,15 @@ void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
 		offset += element.count * VertexBufferLayout::GetSizeOfType(element.type);
 	}
 }
-void VertexArray::bindVertexArray() const {
-	GLCALL(glBindVertexArray(m_renderer_id));
+void VertexArray::bindVertexArray() const { 
+	GLCALL(glBindVertexArray(vao_id));
 }
 void VertexArray::unbindVertexArray() const {
 	GLCALL(glBindVertexArray(0));
+}
+void VertexArray::set_vao_id(unsigned int id) {
+	this->vao_id= id;
+}
+unsigned int VertexArray::get_vao_id() const {
+	return vao_id;
 }

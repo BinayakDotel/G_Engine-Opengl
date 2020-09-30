@@ -1,14 +1,19 @@
 #pragma once
 #include <glm.hpp>
 #include <array>
+#include <GLTFData.h>
 
 class VertexBuffer {
 private:
-	unsigned int m_renderer_id;
+	unsigned int id;
+	m_BufferView m_buffer;
+
 public:
-	VertexBuffer(const void* vertices, unsigned int size);
+	VertexBuffer(m_BufferView m_buffer);
 	~VertexBuffer();
 
-	void bindVertex(const void* vertices, unsigned int size) const;
-	void unBindVertex()const;
+	void bindVertex() const;
+	void unBindVertex() const;
+
+	unsigned int get_vbo_id() const;
 };

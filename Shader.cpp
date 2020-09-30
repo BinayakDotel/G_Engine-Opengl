@@ -2,6 +2,7 @@
 #include <Error.h>
 #include <print.h>
 
+
 Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader)
     :m_renderer_id(0)
 {
